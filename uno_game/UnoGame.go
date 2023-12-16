@@ -58,7 +58,7 @@ func (g *UnoGame) handleNoMatched(player IUnoPlayer) {
 	}
 	g.handleDeckAddHand(player)
 }
-func (g *UnoGame) PerpareGameStep() {
+func (g *UnoGame) PrepareGameStep() {
 	card := g.deck.DrawCard()
 	g.table.AddCard(card)
 }

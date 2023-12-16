@@ -86,4 +86,4 @@ func (g *PokerGame) GetDeck() card_game_template.IDeck[PokerCard] {
 	return (g.deck).(card_game_template.IDeck[PokerCard])
 }
 
-func (g *PokerGame) PerpareGameStep() {}
+func (g *PokerGame) PrepareGameStep() {}

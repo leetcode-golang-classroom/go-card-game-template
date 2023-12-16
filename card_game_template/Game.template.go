@@ -16,13 +16,13 @@ type IGame[C any] interface {
 	IsGameFinished() bool
 	GetPlayers() []IPlayer[C]
 	GetDeck() IDeck[C]
-	PerpareGameStep()
+	PrepareGameStep()
 }
 
 func (g *Game[C]) GameFlow() {
 	g.start()
 	g.drawCards()
-	g.PerpareGameStep()
+	g.PrepareGameStep()
 	g.runGame()
 	g.DisplayWinner()
 }
