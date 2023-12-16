@@ -2,11 +2,13 @@ package poker_game
 
 import (
 	"sort"
+	"time"
 
 	"github.com/leetcode-golang-classroom/go-card-game-template/card_game_template"
 )
 
 type PokerPlayer struct {
+	id    int
 	hands []*PokerCard
 	point int
 	name  string
@@ -16,6 +18,7 @@ type IPokerPlayer interface {
 	card_game_template.IPlayer[PokerCard]
 	GetPoint() int
 	GainPoint()
+	GetId() int
 }
 
 func (p *PokerPlayer) GetPoint() int {
@@ -60,5 +63,10 @@ func NewPlayerData() *PokerPlayer {
 		point: 0,
 		hands: []*PokerCard{},
 		name:  "",
+		id:    time.Now().Nanosecond(),
 	}
+}
+
+func (p *PokerPlayer) GetId() int {
+	return p.id
 }

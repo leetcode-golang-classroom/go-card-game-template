@@ -32,7 +32,20 @@ func (a *AIPokerPlayer) NameSelf() {
 }
 
 func (a *AIPokerPlayer) ChooseHand() *PokerCard {
+	rand.New(rand.NewSource(time.Now().UnixNano()))
 	a.sortHands()
+	// rand from 0,1,2,3, len(a.hands)-1
+	lenHands := len(a.hands) - 1
+	// randIdx := 0
 	idx := 0
+	if lenHands > 4 {
+		randList := []int{0, 1, 2, 3, lenHands}
+		randIdx := rand.Intn(len(randList))
+		// fmt.Printf("randIdx: %v", randIdx)
+		idx = randList[randIdx]
+	} else {
+		idx = rand.Intn(len(a.hands))
+	}
+
 	return a.ExtractCard(idx)
 }

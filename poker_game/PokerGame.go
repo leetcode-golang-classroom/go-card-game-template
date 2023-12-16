@@ -38,13 +38,13 @@ func (g *PokerGame) IsGameFinished() bool {
 
 func (g *PokerGame) TakeTurn() {
 	turn := NewTurn()
-	playersMap := make(map[string]IPokerPlayer)
+	playersMap := make(map[int]IPokerPlayer)
 	for _, player := range g.players {
 		turn.AddShow(player.ChooseHand(), player)
-		playersMap[player.GetName()] = player
+		playersMap[player.GetId()] = player
 	}
 	winner := turn.FindWinner()
-	playersMap[winner.GetName()].GainPoint()
+	playersMap[winner.GetId()].GainPoint()
 	g.DisplayTurn(turn)
 	g.NextTurn()
 }

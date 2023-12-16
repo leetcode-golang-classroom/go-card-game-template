@@ -4,36 +4,36 @@ import "fmt"
 
 type Turn struct {
 	winner      IPokerPlayer
-	playerCards map[string]*PokerCard
-	playerData  map[string]IPokerPlayer
+	playerCards map[int]*PokerCard
+	playerData  map[int]IPokerPlayer
 }
 
 func NewTurn() *Turn {
 	return &Turn{
 		winner:      nil,
-		playerCards: make(map[string]*PokerCard),
-		playerData:  make(map[string]IPokerPlayer),
+		playerCards: make(map[int]*PokerCard),
+		playerData:  make(map[int]IPokerPlayer),
 	}
 }
 func (t *Turn) AddShow(card *PokerCard, player IPokerPlayer) {
-	t.playerCards[player.GetName()] = card
-	t.playerData[player.GetName()] = player
+	t.playerCards[player.GetId()] = card
+	t.playerData[player.GetId()] = player
 }
 func (t *Turn) FindWinner() IPokerPlayer {
 	var maxCard *PokerCard
-	var winnerName string
+	var winnerId int
 	for name, card := range t.playerCards {
 		if maxCard == nil {
 			maxCard = card
-			winnerName = name
+			winnerId = name
 			continue
 		}
 		if maxCard.Compare(card) {
 			maxCard = card
-			winnerName = name
+			winnerId = name
 		}
 	}
-	t.winner = t.playerData[winnerName]
+	t.winner = t.playerData[winnerId]
 	return t.winner
 }
 

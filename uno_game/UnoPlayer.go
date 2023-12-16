@@ -1,8 +1,13 @@
 package uno_game
 
-import "github.com/leetcode-golang-classroom/go-card-game-template/card_game_template"
+import (
+	"time"
+
+	"github.com/leetcode-golang-classroom/go-card-game-template/card_game_template"
+)
 
 type UnoPlayer struct {
+	id          int
 	hands       []*UnoCard
 	name        string
 	matchedList map[int]*UnoCard
@@ -56,6 +61,7 @@ func NewUnoPlayerData() *UnoPlayer {
 		hands:       []*UnoCard{},
 		name:        "",
 		matchedList: make(map[int]*UnoCard),
+		id:          time.Now().Nanosecond(),
 	}
 }
 func (p *UnoPlayer) ExtractCard(idx int) *UnoCard {

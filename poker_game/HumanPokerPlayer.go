@@ -26,7 +26,7 @@ func (h *HumanPokerPlayer) ChooseHand() *PokerCard {
 	answerIsInRange := false
 	for !answerIsInRange {
 		fmt.Printf("%v, Choose Card to Show:", h.name)
-		fmt.Scan(&idx)
+		fmt.Scanf("%d", &idx)
 		answerIsInRange = idx >= 0 && idx < len(h.hands)
 	}
 	return h.ExtractCard(idx)
