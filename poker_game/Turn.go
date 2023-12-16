@@ -43,8 +43,8 @@ func (t *Turn) IsTurnEnd() bool {
 
 func (t *Turn) String() string {
 	result := ""
-	for name, card := range t.playerCards {
-		result += fmt.Sprintf("player:%v, card: %v\n", name, card)
+	for idx, card := range t.playerCards {
+		result += fmt.Sprintf("player:%v, card: %v\n", t.playerData[idx].GetName(), card)
 	}
 	result += fmt.Sprintf("\nwinner: %v, point:%v\n", t.winner.GetName(), t.winner.GetPoint())
 	return result
