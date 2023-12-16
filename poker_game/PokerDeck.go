@@ -31,7 +31,7 @@ func (d *PokerDeck) InitData() {
 }
 
 func (d *PokerDeck) Shuffle() {
-	rand.NewSource(time.Now().UnixNano())
+	rand.New(rand.NewSource(time.Now().UnixNano()))
 	rand.Shuffle(len(d.cards), func(i, j int) {
 		d.cards[i], d.cards[j] = d.cards[j], d.cards[i]
 	})
@@ -45,7 +45,7 @@ func (d *PokerDeck) DrawCards(players []card_game_template.IPlayer[PokerCard]) {
 }
 
 func (d *PokerDeck) DrawCard() *PokerCard {
-	rand.NewSource(time.Now().UnixNano())
+	rand.New(rand.NewSource(time.Now().UnixNano()))
 	idx := rand.Intn(len(d.cards))
 	temp := d.cards[idx]
 	if idx < len(d.cards)-1 {

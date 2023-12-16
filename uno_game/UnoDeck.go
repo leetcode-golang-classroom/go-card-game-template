@@ -36,7 +36,7 @@ func (d *UnoDeck) InitData() {
 }
 
 func (d *UnoDeck) Shuffle() {
-	rand.NewSource(time.Now().UnixNano())
+	rand.New(rand.NewSource(time.Now().UnixNano()))
 	rand.Shuffle(len(d.cards), func(i, j int) {
 		d.cards[i], d.cards[j] = d.cards[j], d.cards[i]
 	})
@@ -50,7 +50,7 @@ func (d *UnoDeck) DrawCards(players []card_game_template.IPlayer[UnoCard]) {
 }
 
 func (d *UnoDeck) DrawCard() *UnoCard {
-	rand.NewSource(time.Now().UnixNano())
+	rand.New(rand.NewSource(time.Now().UnixNano()))
 	idx := rand.Intn(len(d.cards))
 	temp := d.cards[idx]
 	if idx < len(d.cards)-1 {

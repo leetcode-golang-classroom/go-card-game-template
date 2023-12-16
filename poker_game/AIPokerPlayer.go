@@ -22,7 +22,7 @@ func (a *AIPokerPlayer) NameSelf() {
 	nameExist := false
 	name := ""
 	for !nameExist {
-		rand.NewSource(time.Now().UnixNano())
+		rand.New(rand.NewSource(time.Now().UnixNano()))
 		number := rand.Intn(1000)
 		name = fmt.Sprintf("AI-Number%v", number)
 		_, nameExist = usedAIName[name]
