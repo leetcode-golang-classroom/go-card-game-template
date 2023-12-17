@@ -21,7 +21,7 @@ func (h *HumanPokerPlayer) NameSelf() {
 
 func (h *HumanPokerPlayer) ChooseHand() *PokerCard {
 	h.sortHands()
-	fmt.Printf("%v, %v", len(h.hands), h.hands)
+	fmt.Printf("total:%v cards, hands:%v\n", len(h.hands), h.hands)
 	var idx int
 	answerIsInRange := false
 	for !answerIsInRange {
