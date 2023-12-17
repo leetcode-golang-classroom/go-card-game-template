@@ -34,12 +34,6 @@ func (p *UnoPlayer) AddHand(card *UnoCard) {
 	p.hands = append(p.hands, card)
 }
 
-func (p *UnoPlayer) FindMatched(table *Table) map[int]*UnoCard {
-	target := table.FindTopest()
-	matchedList := p.FindMatchedHand(target)
-	p.matchedList = matchedList
-	return matchedList
-}
 func (p *UnoPlayer) HasFinishDraw() bool {
 	return len(p.hands) == 5
 }
