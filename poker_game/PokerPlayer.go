@@ -14,6 +14,8 @@ type PokerPlayer struct {
 	name  string
 }
 
+var playerList = map[int]struct{}{}
+
 type IPokerPlayer interface {
 	card_game_template.IPlayer[PokerCard]
 	GetPoint() int
@@ -59,6 +61,13 @@ func (p *PokerPlayer) sortHands() {
 	})
 }
 func NewPlayerData() *PokerPlayer {
+	userIdExist := true
+	userId := 0
+	for userIdExist {
+		userId = time.Now().Nanosecond()
+		_, userIdExist = playerList[userId]
+		playerList[userId] = struct{}{}
+	}
 	return &PokerPlayer{
 		point: 0,
 		hands: []*PokerCard{},
