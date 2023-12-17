@@ -26,7 +26,9 @@ func (a *AIPokerPlayer) NameSelf() {
 		number := rand.Intn(1000)
 		name = fmt.Sprintf("AI-Number%v", number)
 		_, nameExist = usedAIName[name]
-		usedAIName[name] = struct{}{}
+		if !nameExist {
+			usedAIName[name] = struct{}{}
+		}
 	}
 	a.setName(name)
 }
