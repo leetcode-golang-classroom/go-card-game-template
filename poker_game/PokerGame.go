@@ -49,7 +49,7 @@ func (g *PokerGame) TakeTurn() {
 	g.NextTurn()
 }
 func (g *PokerGame) DisplayTurn(turn *Turn) {
-	fmt.Printf("%vth\n%v\n", g.turns, turn)
+	fmt.Printf("======\n%vth\n%v\n=========\n", g.turns, turn)
 }
 func (g *PokerGame) NextTurn() {
 	g.turns++
