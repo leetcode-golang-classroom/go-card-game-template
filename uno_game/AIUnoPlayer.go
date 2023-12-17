@@ -32,6 +32,7 @@ func (a *AIUnoPlayer) NameSelf() {
 }
 
 func (a *AIUnoPlayer) ChooseHand() *UnoCard {
+	fmt.Printf("ai player: %v\ntotal %v cards in hand, total hands: %v\ntotal %v card could use, usable cards: %v\n", a.name, len(a.hands), a.hands, len(a.matchedList), a.matchedList)
 	resultIdx := 0
 	for idx := range a.matchedList {
 		resultIdx = idx

@@ -20,7 +20,7 @@ func (h *HumanUnoPlayer) NameSelf() {
 }
 
 func (h *HumanUnoPlayer) ChooseHand() *UnoCard {
-	fmt.Printf("%v %v\n", len(h.matchedList), h.matchedList)
+	fmt.Printf("human player: %v\ntotal %v cards in hand, total hands: %v\ntotal %v card could use, usable cards: %v\n", h.name, len(h.hands), h.hands, len(h.matchedList), h.matchedList)
 	var idx int
 	validChoice := false
 	for !validChoice {
