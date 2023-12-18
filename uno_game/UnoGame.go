@@ -71,14 +71,14 @@ func (g *UnoGame) TakeTurn() {
 		g.NextTurn()
 		return
 	}
-	fmt.Printf("========\n%v turn start\n", g.turns)
+	fmt.Printf("========\n%v turn start\n", g.turns+1)
 	g.deck.ShowDeck()
 	fmt.Printf("table top: %v\n", g.table.FindTopest())
 	card := currentPlayer.ChooseHand()
 	fmt.Printf("player %v, show %v\n", currentPlayer.GetName(), card)
 	g.table.AddCard(card)
 	currentPlayer.ClearMatched()
-	fmt.Printf("%v turn end\n", g.turns)
+	fmt.Printf("%v turn end\n", g.turns+1)
 	if !g.IsGameFinished() {
 		g.NextTurn()
 	}
