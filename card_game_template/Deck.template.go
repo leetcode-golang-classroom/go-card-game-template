@@ -1,7 +1,6 @@
 package card_game_template
 
 import (
-	"fmt"
 	"math/rand"
 	"time"
 )
@@ -15,7 +14,6 @@ type IDeck[C any] interface {
 	DrawCards(players []IPlayer[C])
 	DrawCard() *C
 	InitData()
-	ShowDeck()
 }
 
 func NewDeck[C any]() *Deck[C] {
@@ -45,7 +43,4 @@ func (d *Deck[C]) DrawCard() *C {
 		d.Cards = append([]*C{}, d.Cards[:idx]...)
 	}
 	return temp
-}
-func (d *Deck[C]) ShowDeck() {
-	fmt.Printf("%v", d.Cards)
 }

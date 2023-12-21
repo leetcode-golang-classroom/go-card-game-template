@@ -1,6 +1,8 @@
 package uno_game
 
 import (
+	"fmt"
+
 	"github.com/leetcode-golang-classroom/go-card-game-template/card_game_template"
 )
 
@@ -37,4 +39,8 @@ func (d *UnoDeck) AddCards(cards []*UnoCard) {
 
 func (d *UnoDeck) IsDeckEmpty() bool {
 	return len(d.Cards) == 0
+}
+
+func (d *UnoDeck) ShowDeck() {
+	fmt.Printf("deck %v", d.Cards)
 }
