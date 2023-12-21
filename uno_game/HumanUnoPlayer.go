@@ -16,11 +16,11 @@ func (h *HumanUnoPlayer) NameSelf() {
 	fmt.Printf("Please enter player name:")
 	var name string
 	fmt.Scan(&name)
-	h.setName(name)
+	h.SetName(name)
 }
 
 func (h *HumanUnoPlayer) ChooseHand() *UnoCard {
-	fmt.Printf("human player: %v\ntotal %v cards in hand, total hands: %v\ntotal %v card could use, usable cards: %v\n", h.name, len(h.hands), h.hands, len(h.matchedList), h.matchedList)
+	fmt.Printf("human player: %v\ntotal %v cards in hand, total hands: %v\ntotal %v card could use, usable cards: %v\n", h.GetName(), len(h.Hands), h.Hands, len(h.matchedList), h.matchedList)
 	var idx int
 	validChoice := false
 	for !validChoice {

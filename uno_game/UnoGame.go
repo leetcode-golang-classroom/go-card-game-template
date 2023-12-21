@@ -7,6 +7,7 @@ import (
 )
 
 type UnoGame struct {
+	*card_game_template.Game[UnoCard]
 	deck    IUnoDeck
 	players []IUnoPlayer
 	turns   int

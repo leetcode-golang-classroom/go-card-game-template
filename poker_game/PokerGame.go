@@ -7,29 +7,18 @@ import (
 )
 
 type PokerGame struct {
+	*card_game_template.Game[PokerCard]
 	deck    IPokerDeck
 	players []IPokerPlayer
 	turns   int
 }
 
-type IPokerGame interface {
-	card_game_template.IGame[PokerGame]
-}
-
-func NewPokerGame(players []IPokerPlayer) *PokerGame {
+func NewPokerGame(players []IPokerPlayer) card_game_template.IGame[PokerCard] {
 	return &PokerGame{
 		deck:    NewPokerDeck(),
 		players: players,
 		turns:   0,
 	}
-}
-
-func (g *PokerGame) CastToIPlayers(players []IPokerPlayer) []card_game_template.IPlayer[PokerCard] {
-	iplayers := []card_game_template.IPlayer[PokerCard]{}
-	for _, player := range players {
-		iplayers = append(iplayers, player.(card_game_template.IPlayer[PokerCard]))
-	}
-	return iplayers
 }
 
 func (g *PokerGame) IsGameFinished() bool {
@@ -78,12 +67,15 @@ func (g *PokerGame) DisplayWinner() {
 	}
 }
 
-func (g *PokerGame) GetPlayers() []card_game_template.IPlayer[PokerCard] {
-	return g.CastToIPlayers(g.players)
-}
-
-func (g *PokerGame) GetDeck() card_game_template.IDeck[PokerCard] {
-	return (g.deck).(card_game_template.IDeck[PokerCard])
-}
-
 func (g *PokerGame) PrepareGameStep() {}
+func (g *PokerGame) GetDeck() card_game_template.IDeck[PokerCard] {
+	return g.deck.(card_game_template.IDeck[PokerCard])
+}
+func (g *PokerGame) GetPlayers() []card_game_template.IPlayer[PokerCard] {
+	players := []card_game_template.IPlayer[PokerCard]{}
+	for _, player := range g.players {
+		c_player := player.(card_game_template.IPlayer[PokerCard])
+		players = append(players, c_player)
+	}
+	return players
+}

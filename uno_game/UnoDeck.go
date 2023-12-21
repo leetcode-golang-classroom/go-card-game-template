@@ -1,15 +1,11 @@
 package uno_game
 
 import (
-	"fmt"
-	"math/rand"
-	"time"
-
 	"github.com/leetcode-golang-classroom/go-card-game-template/card_game_template"
 )
 
 type UnoDeck struct {
-	cards []*UnoCard
+	*card_game_template.Deck[UnoCard]
 }
 type IUnoDeck interface {
 	card_game_template.IDeck[UnoCard]
@@ -20,59 +16,25 @@ type IUnoDeck interface {
 
 func NewUnoDeck() *UnoDeck {
 	deck := &UnoDeck{
-		cards: []*UnoCard{},
+		card_game_template.NewDeck[UnoCard](),
 	}
 	deck.InitData()
 	return deck
 }
 
 func (d *UnoDeck) InitData() {
-	d.cards = []*UnoCard{}
+	d.Cards = []*UnoCard{}
 	for _, number := range Numbers {
 		for _, color := range Colors {
-			d.cards = append(d.cards, &UnoCard{number: number, color: color})
+			d.Cards = append(d.Cards, &UnoCard{number: number, color: color})
 		}
 	}
 }
 
-func (d *UnoDeck) Shuffle() {
-	rand.New(rand.NewSource(time.Now().UnixNano()))
-	rand.Shuffle(len(d.cards), func(i, j int) {
-		d.cards[i], d.cards[j] = d.cards[j], d.cards[i]
-	})
-}
-
-func (d *UnoDeck) DrawCards(players []card_game_template.IPlayer[UnoCard]) {
-	for _, player := range players {
-		card := d.DrawCard()
-		player.AddHand(card)
-	}
-}
-
-func (d *UnoDeck) DrawCard() *UnoCard {
-	rand.New(rand.NewSource(time.Now().UnixNano()))
-	idx := rand.Intn(len(d.cards))
-	temp := d.cards[idx]
-	if idx < len(d.cards)-1 {
-		d.cards = append(d.cards[:idx], d.cards[idx+1:]...)
-	} else {
-		d.cards = append([]*UnoCard{}, d.cards[:idx]...)
-	}
-	return temp
-}
-
 func (d *UnoDeck) AddCards(cards []*UnoCard) {
-	d.cards = append(d.cards, cards...)
-}
-
-func (d *UnoDeck) ShowDeck() {
-	fmt.Print("deck:")
-	for _, card := range d.cards {
-		fmt.Printf("%v,", card)
-	}
-	fmt.Println()
+	d.Cards = append(d.Cards, cards...)
 }
 
 func (d *UnoDeck) IsDeckEmpty() bool {
-	return len(d.cards) == 0
+	return len(d.Cards) == 0
 }

@@ -14,9 +14,9 @@ type IGame[C any] interface {
 	TakeTurn()
 	DisplayWinner()
 	IsGameFinished() bool
-	GetPlayers() []IPlayer[C]
-	GetDeck() IDeck[C]
 	PrepareGameStep()
+	GetDeck() IDeck[C]
+	GetPlayers() []IPlayer[C]
 }
 
 func (g *Game[C]) GameFlow() {
@@ -27,10 +27,10 @@ func (g *Game[C]) GameFlow() {
 	g.DisplayWinner()
 }
 func (g *Game[C]) drawCards() {
-	iplayers := g.GetPlayers()
-	iDeck := g.GetDeck()
-	for !iplayers[0].HasFinishDraw() {
-		iDeck.DrawCards(iplayers)
+	players := g.GetPlayers()
+	deck := g.GetDeck()
+	for !players[0].HasFinishDraw() {
+		deck.DrawCards(players)
 	}
 }
 func (g *Game[C]) runGame() {
@@ -40,10 +40,10 @@ func (g *Game[C]) runGame() {
 }
 
 func (g *Game[C]) start() {
-	iplayers := g.GetPlayers()
-	iDeck := g.GetDeck()
-	for _, iplayer := range iplayers {
-		iplayer.NameSelf()
+	players := g.GetPlayers()
+	deck := g.GetDeck()
+	for _, player := range players {
+		player.NameSelf()
 	}
-	iDeck.Shuffle()
+	deck.Shuffle()
 }

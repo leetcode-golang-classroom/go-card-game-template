@@ -2,19 +2,14 @@ package poker_game
 
 import (
 	"sort"
-	"time"
 
 	"github.com/leetcode-golang-classroom/go-card-game-template/card_game_template"
 )
 
 type PokerPlayer struct {
-	id    int
-	hands []*PokerCard
+	*card_game_template.Player[PokerCard]
 	point int
-	name  string
 }
-
-var playerList = map[int]struct{}{}
 
 type IPokerPlayer interface {
 	card_game_template.IPlayer[PokerCard]
@@ -23,59 +18,26 @@ type IPokerPlayer interface {
 	GetId() int
 }
 
+func NewPokerPlayer() *PokerPlayer {
+	player := card_game_template.NewPlayer[PokerCard]()
+	rPlayer := &PokerPlayer{
+		Player: player,
+		point:  0,
+	}
+	return rPlayer
+}
+func (p *PokerPlayer) HasFinishDraw() bool {
+	return len(p.Hands) == 13
+}
+
 func (p *PokerPlayer) GetPoint() int {
 	return p.point
 }
 func (p *PokerPlayer) GainPoint() {
 	p.point++
 }
-func (p *PokerPlayer) setName(name string) {
-	p.name = name
-}
-
-func (p *PokerPlayer) HasFinishDraw() bool {
-	return len(p.hands) == 13
-}
-
-func (p *PokerPlayer) AddHand(card *PokerCard) {
-	p.hands = append(p.hands, card)
-}
-
-func (p *PokerPlayer) GetName() string {
-	return p.name
-}
-
-func (p *PokerPlayer) ExtractCard(idx int) *PokerCard {
-	temp := p.hands[idx]
-	if idx < len(p.hands)-1 {
-		p.hands = append(p.hands[:idx], p.hands[idx+1:]...)
-	} else {
-		p.hands = append([]*PokerCard{}, p.hands[:idx]...)
-	}
-	return temp
-}
-
 func (p *PokerPlayer) sortHands() {
-	sort.Slice(p.hands, func(i, j int) bool {
-		return !p.hands[i].Compare(p.hands[j])
+	sort.Slice(p.Hands, func(i, j int) bool {
+		return !p.Hands[i].Compare(p.Hands[j])
 	})
-}
-func NewPlayerData() *PokerPlayer {
-	userIdExist := true
-	userId := 0
-	for userIdExist {
-		userId = time.Now().Nanosecond()
-		_, userIdExist = playerList[userId]
-		playerList[userId] = struct{}{}
-	}
-	return &PokerPlayer{
-		point: 0,
-		hands: []*PokerCard{},
-		name:  "",
-		id:    time.Now().Nanosecond(),
-	}
-}
-
-func (p *PokerPlayer) GetId() int {
-	return p.id
 }

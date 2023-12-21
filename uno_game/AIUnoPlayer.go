@@ -28,11 +28,11 @@ func (a *AIUnoPlayer) NameSelf() {
 		_, nameExist = usedAIName[name]
 		usedAIName[name] = struct{}{}
 	}
-	a.setName(name)
+	a.SetName(name)
 }
 
 func (a *AIUnoPlayer) ChooseHand() *UnoCard {
-	fmt.Printf("ai player: %v\ntotal %v cards in hand, total hands: %v\ntotal %v card could use, usable cards: %v\n", a.name, len(a.hands), a.hands, len(a.matchedList), a.matchedList)
+	fmt.Printf("ai player: %v\ntotal %v cards in hand, total hands: %v\ntotal %v card could use, usable cards: %v\n", a.GetName(), len(a.Hands), a.Hands, len(a.matchedList), a.matchedList)
 	resultIdx := 0
 	for idx := range a.matchedList {
 		resultIdx = idx

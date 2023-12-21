@@ -14,7 +14,7 @@ var usedAIName map[string]struct{} = make(map[string]struct{})
 
 func NewAIPokerPlayer() *AIPokerPlayer {
 	return &AIPokerPlayer{
-		PokerPlayer: NewPlayerData(),
+		NewPokerPlayer(),
 	}
 }
 
@@ -28,16 +28,18 @@ func (a *AIPokerPlayer) NameSelf() {
 		_, nameExist = usedAIName[name]
 		if !nameExist {
 			usedAIName[name] = struct{}{}
+		} else {
+			fmt.Printf("ai player: %v\n", name)
 		}
 	}
-	a.setName(name)
+	a.SetName(name)
 }
 
 func (a *AIPokerPlayer) ChooseHand() *PokerCard {
 	rand.New(rand.NewSource(time.Now().UnixNano()))
 	a.sortHands()
 	// rand from 0,1,2,3, len(a.hands)-1
-	lenHands := len(a.hands) - 1
+	lenHands := len(a.Hands) - 1
 	// randIdx := 0
 	idx := 0
 	if lenHands > 4 {
@@ -46,7 +48,7 @@ func (a *AIPokerPlayer) ChooseHand() *PokerCard {
 		// fmt.Printf("randIdx: %v", randIdx)
 		idx = randList[randIdx]
 	} else {
-		idx = rand.Intn(len(a.hands))
+		idx = rand.Intn(len(a.Hands))
 	}
 
 	return a.ExtractCard(idx)
