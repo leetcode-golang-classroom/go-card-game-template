@@ -18,13 +18,14 @@ type IUnoGame interface {
 	card_game_template.IGame[UnoCard]
 }
 
-func NewUnoGame(players []IUnoPlayer) *UnoGame {
-	return &UnoGame{
+func NewUnoGame(players []IUnoPlayer) card_game_template.IGame[UnoCard] {
+	game := &UnoGame{
 		deck:    NewUnoDeck(),
 		players: players,
 		turns:   0,
 		table:   NewTable(),
 	}
+	return card_game_template.NewGame[UnoCard](game)
 }
 
 func (g *UnoGame) CastToIPlayers(players []IUnoPlayer) []card_game_template.IPlayer[UnoCard] {

@@ -17,6 +17,7 @@ type IGame[C any] interface {
 	PrepareGameStep()
 	GetDeck() IDeck[C]
 	GetPlayers() []IPlayer[C]
+	GameFlow()
 }
 
 func (g *Game[C]) GameFlow() {

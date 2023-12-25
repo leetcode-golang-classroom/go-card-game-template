@@ -14,11 +14,12 @@ type PokerGame struct {
 }
 
 func NewPokerGame(players []IPokerPlayer) card_game_template.IGame[PokerCard] {
-	return &PokerGame{
+	game := &PokerGame{
 		deck:    NewPokerDeck(),
 		players: players,
 		turns:   0,
 	}
+	return card_game_template.NewGame[PokerCard](game)
 }
 
 func (g *PokerGame) IsGameFinished() bool {
@@ -74,8 +75,7 @@ func (g *PokerGame) GetDeck() card_game_template.IDeck[PokerCard] {
 func (g *PokerGame) GetPlayers() []card_game_template.IPlayer[PokerCard] {
 	players := []card_game_template.IPlayer[PokerCard]{}
 	for _, player := range g.players {
-		c_player := player.(card_game_template.IPlayer[PokerCard])
-		players = append(players, c_player)
+		players = append(players, player.(card_game_template.IPlayer[PokerCard]))
 	}
 	return players
 }
